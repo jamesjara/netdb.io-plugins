@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
-
 <body>
-
- 
+<div id="module"></div>
 <script>
 document.domain = "netdb.io";
 
 window.addEventListener('message', function(event){
-    // if (~event.origin.indexOf('http://yoursite.com')) 
+    // if (~event.origin.indexOf('http://netdb.io')) 
     initPlugin(event.data);
 }); 
+ 
 
 function initPlugin(data){
 
-data.forEach(function(item, index, array) {
-  document.write(item['ip']);
-});
+	data.forEach(function(item, index, array) {
+
+	  var node = document.createElement("LI");
+	  var textLi = document.createTextNode(item["ip"]);
+	  node.appendChild(textLi);
+	  document.getElementById("module").appendChild(node);
+
+	});
 
 
 }
 
 </script>
-
 </body>
 </html>
 
