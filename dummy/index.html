@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+ 
+<script>
+ 
+var ips = [{
+"ip": "ip1"
+},{
+"ip": "ip2"
+}];
+
+
+initPlugin(ips);
+
+function initPlugin(data){
+
+data.forEach(function(item, index, array) {
+  document.write(item['ip']);
+});
+
+
+}
+
+</script>
+
+</body>
+</html>
+
