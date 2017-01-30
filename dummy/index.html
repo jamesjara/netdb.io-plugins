@@ -5,8 +5,12 @@
 
  
 <script>
-  document.domain = "netdb.io";
- 
+document.domain = "netdb.io";
+
+window.addEventLister('message', function(event){
+    // if (~event.origin.indexOf('http://yoursite.com')) 
+    initPlugin(event.data);
+}); 
 
 function initPlugin(data){
 
