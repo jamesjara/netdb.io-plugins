@@ -40,15 +40,18 @@ Ext.onReady(function(){
         title: 'Web screenshot netdb.io (0 items selected)',
         items: Ext.create('Ext.view.View', {
             store: store,
-            tpl: [
+            tpl: new Ext.XTemplate(
                 '<tpl for=".">',
                     '<div class="thumb-wrap" id="{product:stripTags}">',
-                        '<div class="thumb"><img src="http://api.screenshotmachine.com/?key='+window.key+'&size=t&url=http://{ip}" title="{product:htmlEncode}"></div>',
+                        '<div class="thumb"><img src="http://api.screenshotmachine.com/?key={[this.getKey()]}&size=t&url=http://{ip}" title="{product:htmlEncode}"></div>',
                         '<span class="x-editable">{ip:htmlEncode} - {product:htmlEncode}</span>',
                     '</div>',
                 '</tpl>',
-                '<div class="x-clear"></div>'
-            ],
+                '<div class="x-clear"></div>', {
+                getKey: function(){
+                	return window.key;
+                }
+                }),
             multiSelect: true, 
             trackOver: true,
             overItemCls: 'x-item-over',
