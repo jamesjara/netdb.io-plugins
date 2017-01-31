@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+
+    <link rel="stylesheet" type="text/css" href="http://examples.sencha.com/extjs/5.1.0/examples/shared/example.css" />
+    <link rel="stylesheet" type="text/css" href="http://examples.sencha.com/extjs/5.1.0/examples/view/data-view.css" />
+    <script type="text/javascript" src="http://examples.sencha.com/extjs/5.1.0/examples/shared/include-ext.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+    <div id="dataview"></div>
+    <script>
+	window.addEventListener('message', function(event){
+	    // if (~event.origin.indexOf('http://netdb.io')) 
+	    initPlugin(event.data);
+	});
+	function initPlugin(response){
+		Ext.onReady(function(){
+			window.key = response['config']['key']; 
+			var store = Ext.getStore('viewStore');
+			store.setProxy({type: "memory", enablePaging: true, data: response['data']});
+			store.load();
+		});
+	}
+    </script>
+</body>
+</html>
+
