@@ -1,2 +1,2 @@
 # netdb.io-plugins
-netdb.io plugins
+netdb.io plugins.
