@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        #menu { position: absolute; background: rgba(0,0,0,0.3);
+            color: white; padding: 8px; font-size: 15px;}
+        #marker { background-image: url('http://www.myiconfinder.com/uploads/iconsets/256-256-f900504cdc9f243b1c6852985c35a7f7.png');
+            /*Icom By:  Aung Thaw Htut - CC BY 3.0 -
+             https://creativecommons.org/licenses/by/3.0/ -
+             www.myiconfinder.com/icon/place-base-gps-location-map-maps-marker-navigation-pin-location/3986 */
+            background-size: cover; width: 50px; height: 50px;
+            border-radius: 50%; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+
+<div id='map'></div>
+<div id='menu'>
+    <input id='streets' type='radio' name='rtoggle' value='streets' checked='checked'>
+    <label for='streets'>Streets</label><br> 
+    <input id='dark' type='radio' name='rtoggle' value='dark' >
+    <label for='dark'>Dark</label><br>
+    <input id='satellite' type='radio' name='rtoggle' value='satellite'>
+    <label for='satellite'>Satellite</label>
+</div>
+
+<script>
+
+window.addEventListener('message', function(event){
+    // if (~event.origin.indexOf('http://netdb.io')) 
+    initPlugin(event.data);
+});
+/*
+function initPlugin(response){
+    Ext.onReady(function(){
+        window.key = response['config']['key']; 
+        var store = Ext.getStore('viewStore');
+        store.setProxy({type: 'memory', enablePaging: true, data: response['data']});
+        store.load();
+    });
+    // code ?
+}
+*/
+
+
+code()
+function code(data) {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZmFmYWJhIiwiYSI6ImNpeWpwMzd3ZDAwMDMycXM3YXdlZ3licHEifQ.XJU54ySPMKfOLLK8qo2QFA'; // public key - mapbox
+
+    // variables hardcodeadas
+    var geo =
+        [[-83.04160, 9.96312],[-83.04149,9.96212],
+        [-83.03132,9.96412],[-82.4283,8.3790],
+        [-82.1494,8.3097],[-72.2262,11.4568]], // longitud, latitud
+        geoLen = geo.length,
+        ip = [['0.0.0.0'],['1.1.1.1'],['2.2.2.2'],
+        ['3.3.3.3'],['4.4.4.4'],['5.5.5.5']],        
+        hostName = [['NSA'],['FBI'],['White House']
+        ['Defense'],['Navy'],['Marines'],['JCS']]
+
+
+
+    var popup = '',
+        div = '',
+        info = ''
+
+    var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            center: geo[0],
+            zoom: geoLen > 1 ? 3 : 15
+        })
+
+        // radio
+    var layerList = document.getElementById('menu'),
+        inputs = layerList.getElementsByTagName('input')
+
+    for (var i = 0; i < inputs.length; i++)
+        inputs[i].onclick = switchLayer  
+
+
+    for (var i = geoLen - 1; i >= 0; i--) {
+        
+        info = `${ip[i]} / ${hostName[i]}`    
+        
+
+        popup = new mapboxgl.Popup({offset: 39})
+                .setText( info )    
+
+        div = document.createElement('div')
+        div.id = 'marker'
+
+        new mapboxgl.Marker(div, {offset:[-25, -50]})
+            .setLngLat(geo[i])
+            .setPopup(popup)
+            .addTo(map)
+    }   
+    function switchLayer(layer)
+    {
+        layerId = layer.target.id
+        map.setStyle(`mapbox://styles/mapbox/${layerId}-v9`)
+    }
+}
+</script>
+</body>
+</html>
