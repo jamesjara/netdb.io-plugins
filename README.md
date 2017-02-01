@@ -3,10 +3,10 @@ netdb.io plugins.
 
 This is the oficial repository for netdb.io
 
-# What is a netdb plugin
+## What is a netdb plugin
 Plugins are tools that will run agains the dataset of specific workspace. PLugins run sandboxed, so no plugin can comunicate with the netdb software, but netdb suftware can. Plugin trying to access to the netdb platform itself, will be deleted.
 
-# Coding standars
+## Coding standars
 
 ## how it works
 QUite simple.
