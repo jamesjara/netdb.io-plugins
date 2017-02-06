@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
+    <script src='plugin.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet'/>
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        #menu { position: absolute; background: rgba(0,0,0,0.3);
+            color: white; padding: 8px; font-size: 15px;}
+        #marker { background-image: url('popup.png');
+            /* Icom By:  Aung Thaw Htut - CC BY 3.0  */
+            background-size: cover; width: 50px; height: 50px;
+            border-radius: 50%; cursor: pointer; }
+    </style>
+</head>
+    <body>
+        <div id='map'></div>
+        <div id='menu'>
+            <input id='streets' type='radio' name='rtoggle' value='streets' checked='checked'>
+            <label for='streets'>Streets</label><br> 
+            <input id='dark' type='radio' name='rtoggle' value='dark' >
+            <label for='dark'>Dark</label><br>
+            <input id='satellite' type='radio' name='rtoggle' value='satellite'>
+            <label for='satellite'>Satellite</label>
+        </div>
+
+        <script>
+            window.addEventListener('mesage', function(event){
+                // if (~event.origin.indexOf('https://netdb.io')) 
+                initPlugin(event.data);
+            });
+            function initPlugin(response){
+                var mapbox = new mapPlugin(response[data])
+            }
+        </script>
+    </body>
+</html>
